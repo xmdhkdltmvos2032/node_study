@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt")
+
 
 const userSchema = mongoose.Schema({
     name: {
@@ -29,6 +31,19 @@ const userSchema = mongoose.Schema({
     tokenExp: {
         type: Number
     }
+})
+
+userSchema.pre("save",function(next){
+    // 비밀번호 암호화 시킨다.
+
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+            // Store hash in your password DB.
+        });
+    });
+
+    next();
+
 })
 
 const User = mongoose.model("User",userSchema)

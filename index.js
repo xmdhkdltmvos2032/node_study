@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const mongoose = require("mongoose");
-const config = require("./config/key")
+const config = require("./config/key");
 
 app.use(express.json()) //For JSON requests
 app.use(express.urlencoded({ extended: true }));
